@@ -16,6 +16,9 @@
       "name": "Titan",
       "search": "\"Titan Company\" OR \"Titan\" shares"
     },
+    {"symbol": "IDFCFIRSTB", "name": "IDFC First Bank", "search": "\"IDFC First Bank\""},
+    {"symbol": "HDFCBANK", "name": "HDFC Bank", "search": "\"HDFC Bank\""},
+    {"symbol": "KPITTECH", "name": "KPIT Technologies", "search": "\"KPIT Technologies\" OR \"KPIT Tech\""},
     {
       "symbol": "Swiggy",
       "name": "Swiggy",
