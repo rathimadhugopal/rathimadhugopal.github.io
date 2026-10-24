@@ -1,24 +1,24 @@
 {
- "built_at": "2026-10-23T14:45:52.365054+05:30",
+ "built_at": "2026-10-24T15:19:51.909152+05:30",
  "tz": "Asia/Kolkata",
  "mood": [
   {
    "name": "Nifty 50",
-   "last": 21328.96,
-   "change_pct": -1.265145406082513,
-   "date": "2026-10-22"
+   "last": 22600.0,
+   "change_pct": -0.3863352489829386,
+   "date": "2026-10-23"
   },
   {
    "name": "S&P 500 (US, overnight)",
-   "last": 5841.26,
-   "change_pct": 0.15877914951989425,
-   "date": "2026-10-22"
+   "last": 7623.68017578125,
+   "change_pct": -0.5186972294159098,
+   "date": "2026-10-23"
   },
   {
    "name": "USD/INR",
-   "last": 90.09,
-   "change_pct": -0.2767323444764269,
-   "date": "2026-10-22"
+   "last": 94.94000244140625,
+   "change_pct": 0.24146930884485496,
+   "date": "2026-10-24"
   }
  ],
  "stocks": [
@@ -26,39 +26,39 @@
    "symbol": "YESBANK",
    "name": "Yes Bank",
    "tech": {
-    "last": 16.96,
-    "prev": 16.79,
-    "date": "2026-10-22",
-    "day_vol_pct": 0.8370021999525227,
-    "range_lo": 16.818044426888054,
-    "range_hi": 17.10195557311195,
-    "change_pct": 1.0125074449076843,
-    "change_5d_pct": -0.3525264394829586,
-    "sma20": 16.8965,
-    "sma50": 17.8714,
-    "rsi": 52.903225806451616,
-    "high_3m": 21.3,
-    "low_3m": 16.7,
+    "last": 15.800000190734863,
+    "prev": 16.049999237060547,
+    "date": "2026-10-23",
+    "day_vol_pct": 3.5267426645611817,
+    "range_lo": 15.242774843007469,
+    "range_hi": 16.35722553846226,
+    "change_pct": -1.5576265308998805,
+    "change_5d_pct": -12.803534994740584,
+    "sma20": 19.77200016975403,
+    "sma50": 21.53519998550415,
+    "rsi": 15.577180728238687,
+    "high_3m": 23.479999542236328,
+    "low_3m": 15.800000190734863,
     "spark": [
-     16.87,
-     16.8,
-     16.72,
-     16.76,
-     16.72,
-     16.71,
-     16.7,
-     17.02,
-     16.89,
-     17.02,
-     17.08,
-     16.94,
-     17.04,
-     16.79,
-     16.96
+     20.75,
+     21.059999465942383,
+     20.860000610351562,
+     20.790000915527344,
+     20.450000762939453,
+     20.5,
+     20.440000534057617,
+     20.850000381469727,
+     21.200000762939453,
+     18.1200008392334,
+     17.5,
+     16.8799991607666,
+     16.40999984741211,
+     16.049999237060547,
+     15.800000190734863
     ]
    },
    "news": {
-    "score": -1.33,
+    "score": -0.75,
     "tone": "negative",
     "flags": [
      "Court case"
@@ -67,48 +67,45 @@
    },
    "headlines": [
     {
-     "title": "Supreme Court rules against Yes Bank in AT-1 bond write-off case",
-     "source": "Demo wire",
-     "link": "",
-     "when": "2026-10-23 11:45:52.365054+05:30",
+     "title": "Nippon Life India AMC gets regulatory nod to settle Yes Bank bond case",
+     "source": "Reuters",
+     "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQbGxwdXlDdlFuaC0wbzM0QWpHSWwyZ2tZLVJMNU9wdEl0UWtTWm1nTHRhcm44cFBicVJIa3Q0Um9CbUdBcU5BRXd5a0R3Wl9tZE96eTJiWWhuUkpwNTJ6U2V0eDJpVzRaVmh2UU1LUEpWR1phNUViWFlHSW9YLXIwVjVFY0JobGpsZ2lPTVNSTzhfRVhwWExkVVZsbUZxT2pBaFdUVS1FQnBldEdWbjNqWm5Ubzk?oc=5",
+     "when": "2026-10-22 20:30:27+00:00",
+     "score": 0,
+     "bad_tags": [],
+     "good_tags": []
+    },
+    {
+     "title": "YES Bank Share Price - Live NSE: YESBANK Stock Price & Chart",
+     "source": "Upstox",
+     "link": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9ENUFMY052a2RKUUtMSXZ4ZmRuQ3Nfdk8zMzlrQXJTRTgzOUotSzFVQ0dXNnB0a0doeDI4dkNscVZDNC0xZmF6cXA3bktlZEhHajRXZWdWckx1N0VCbEhQaUF6ZkZ5QQ?oc=5",
+     "when": "2026-10-23 16:03:34+00:00",
+     "score": 0,
+     "bad_tags": [],
+     "good_tags": []
+    },
+    {
+     "title": "Supreme Court Ruling Revives Controversy Surrounding Yes Bank AT1 Bonds",
+     "source": "India News Network",
+     "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNSjBuTXRYZGY1UWRTTGdMRlZJQXdhR29WcnotTjR0OWU3bVJHN1hQN3pHb2pjR21oU2F3dnExTERzUUhsLV80a3daUEtZQnJvdVNMY29ud1BkM0hjODZJak1aSHNoOVYxUGgyZnlsV2xyMHhoQWphZXBSbUc2X0VRa1dXQ0NuOXRCeFB1eVd4UnFjdmhsczhqaHNsblVJTXVIT0dEZVYtXzh6eElpd1BiZlJRRExBclU?oc=5",
+     "when": "2026-10-24 05:13:54+00:00",
      "score": -2,
      "bad_tags": [
       "Court case"
      ],
      "good_tags": []
-    },
-    {
-     "title": "Yes Bank shares fall 6% after apex court verdict",
-     "source": "Demo wire",
-     "link": "",
-     "when": "2026-10-23 06:45:52.365054+05:30",
-     "score": -3,
-     "bad_tags": [
-      "Court case",
-      "Selling pressure"
-     ],
-     "good_tags": []
-    },
-    {
-     "title": "SMBC completes additional stake purchase in Yes Bank",
-     "source": "Demo wire",
-     "link": "",
-     "when": "2026-10-23 01:45:52.365054+05:30",
-     "score": 1,
-     "bad_tags": [],
-     "good_tags": [
-      "Deal or investment"
-     ]
     }
    ],
    "lean": {
     "label": "Leaning down",
-    "score": -2.7,
+    "score": -2.5,
     "confidence": "medium",
     "reasons": [
-     "headlines are negative (-1.3)",
+     "headlines are negative (-0.8)",
      "serious negative news: court case",
-     "trend is sideways"
+     "price below its 20- and 50-day averages (downtrend)",
+     "closed -1.6% yesterday (pressure)",
+     "RSI 16: oversold, bounce possible"
     ],
     "p_up": 0.25
    }
@@ -117,174 +114,174 @@
    "symbol": "SBIN",
    "name": "SBI",
    "tech": {
-    "last": 1017.18,
-    "prev": 1019.33,
-    "date": "2026-10-22",
-    "day_vol_pct": 0.9994576072209937,
-    "range_lo": 1007.0137171108694,
-    "range_hi": 1027.3462828891304,
-    "change_pct": -0.210922861095042,
-    "change_5d_pct": -0.7232161157145756,
-    "sma20": 988.775,
-    "sma50": 963.2022000000001,
-    "rsi": 70.87814940327092,
-    "high_3m": 1034.47,
-    "low_3m": 916.54,
+    "last": 958.5999755859375,
+    "prev": 970.0,
+    "date": "2026-10-23",
+    "day_vol_pct": 1.1250860895424895,
+    "range_lo": 947.8149006062624,
+    "range_hi": 969.3850505656126,
+    "change_pct": -1.1752602488724229,
+    "change_5d_pct": -0.1458358764648393,
+    "sma20": 960.6224975585938,
+    "sma50": 1000.612998046875,
+    "rsi": 51.77725152756659,
+    "high_3m": 1097.199951171875,
+    "low_3m": 940.0,
     "spark": [
-     960.5,
-     965.87,
-     969.73,
-     976.05,
-     972.0,
-     995.12,
-     999.48,
-     1017.21,
-     1034.47,
-     1024.59,
-     1004.87,
-     1021.04,
-     1017.31,
-     1019.33,
-     1017.18
+     954.0999755859375,
+     958.0,
+     958.75,
+     954.0,
+     940.0,
+     959.0999755859375,
+     941.0,
+     957.0,
+     954.9000244140625,
+     960.0,
+     962.5999755859375,
+     973.7000122070312,
+     963.0,
+     970.0,
+     958.5999755859375
     ]
    },
    "news": {
-    "score": -1.33,
+    "score": -1.25,
     "tone": "negative",
     "flags": [
-     "Data breach",
-     "Probe"
+     "Data breach"
     ],
     "count": 3
    },
    "headlines": [
     {
-     "title": "SBI confirms probe into alleged customer data breach",
-     "source": "Demo wire",
-     "link": "",
-     "when": "2026-10-23 11:45:52.365054+05:30",
-     "score": -3,
-     "bad_tags": [
-      "Data breach",
-      "Probe"
-     ],
-     "good_tags": []
-    },
-    {
-     "title": "SBI shares slip as investors weigh cyber incident",
-     "source": "Demo wire",
-     "link": "",
-     "when": "2026-10-23 06:45:52.365054+05:30",
-     "score": -1,
-     "bad_tags": [
-      "Selling pressure"
-     ],
-     "good_tags": []
-    },
-    {
-     "title": "SBI Q2 preview: analysts expect steady loan growth",
-     "source": "Demo wire",
-     "link": "",
-     "when": "2026-10-23 01:45:52.365054+05:30",
+     "title": "Bank holiday today: Are SBI, HDFC, ICICI, PNB branches closed on 24 October for fourth Saturday? Check RBI calendar",
+     "source": "Livemint",
+     "link": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxNUEFYT2JkWUhwSjIwdGVQVmhMR2Y3Mlc0cFN6STZHZVd1aWFHOFVIeG5ibi1uWWJRNTVYdmsyWmxMY3NOT2ptcVJBUzFKeFMxZ2lkTGlwWUJwTGJYSVR3VU1yMGNGbWVsU01FZXFNVW80aWQxRklXMWx3Nzd5Rzk1TzhTMUpsRXFWaXJIM0lKY3AzZ2tOMVV0dEMxaml5WlZVdUd0OTNhNW15SVVSZDhrdDRQZUhfLXNXN0U1dHppclJ3YVFNeDVHeWdhQ0NqUFNxdVRrdF9VVXk2MWhTVGNLME8zNkVMZElXVmRHaVNDdGJ3WmM0bC10WS1hV2RFbWfSAYQCQVVfeXFMTXQ3aDZ4M2VWN0tkc0JUSEYwSlVOU0xzeTNVWHJnd0VhQ2hrV29LbFJMVWdGV2xxdHNIQTVLcV90TVZrT05fOTc0MEJhanV2NjdMaFIzUjFRM0pfUS1ja1BBazVweUdQQXpma1hDQjBMZktLM05icm5iS3ZZN3p3bVptMUUtcWJGT2Y5OVI1X0dNRmgxNG9JMHVtYms5WFZWU1MtTHJUa19ZS3MtLVlMbmtSM3A2a1hOV2h0MG1vUkFiZzJzNG8tbzZIdlUxU00xRk93V19kS3ZKLUxaOFRWdFRqTkREQnVkanpFSEtzdElEWE1icWJtU2RVUVNaTjY4akFKRGw?oc=5",
+     "when": "2026-10-24 01:45:07+00:00",
      "score": 0,
      "bad_tags": [],
+     "good_tags": []
+    },
+    {
+     "title": "SBI Data Breach: State Bank of India Customers Have No DPDP Act Remedy",
+     "source": "The Probe",
+     "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE50WGx5RnpKZkpHdUZib01zSkZ1U2RINnE0clY0T09YOGUzaXVvOTdnQmM4RmgzaFNING9hdkRYZF94dHNDUlVNTVpLSjF3VDFvR190VVRPdW12QUl2ZmxHa282ZnVLVERQRmU4cGlWemVRR3k4VGNhWkh5Z9IBe0FVX3lxTE50WGx5RnpKZkpHdUZib01zSkZ1U2RINnE0clY0T09YOGUzaXVvOTdnQmM4RmgzaFNING9hdkRYZF94dHNDUlVNTVpLSjF3VDFvR190VVRPdW12QUl2ZmxHa282ZnVLVERQRmU4cGlWemVRR3k4VGNhWkh5Zw?oc=5",
+     "when": "2026-10-24 03:30:37+00:00",
+     "score": -2,
+     "bad_tags": [
+      "Data breach"
+     ],
+     "good_tags": []
+    },
+    {
+     "title": "Data breach: SBI says it individually informed all affected customers",
+     "source": "The Hindu",
+     "link": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOU1RiZ2JxUGY4c19kaURNYll0N3pqMWlCYjFKMmJiZmJuQXZSQ3NMcHdNTUJqZTlKRHQtOTlrS0RKWDZKdXNKX1J6U2dUMTBSak9GTm9nUWRnUU9RYndmZURVZlhJR0E4QTgxUDhzVTdYOGtNR1hVaS1rQ2xYUlQtZU0zQlAxYVBoZnJkc0dKMFREWDU1MXlBb2VDTURuUGlyd2dCWnJKU3ltUVpFMENEbEM1em84RmMxNlR0UHJkS0VISXlWN3pYRHNhd9IB0gFBVV95cUxNbVhOYlR5eGtPWkoycGUyN1ZHLWlaYm16cHhwMmNJYkIyZmR6Yjl2Tkx2UFVxRWRXRDA4YVl5R0RIUDhJRUFUZDNCeVJtRGYxdC1TTjh0dlJVWFVIbzFSZ0JjRVp6Ry1VTnJ6cVlUREt0YmR2aU1VRmtBVENIMkpxSWlmcUV1MlZVV0hjZXRSUGcxUVNfcm9VSUZ5LW45UGM0MUhGVUFuenA3QlRpblJmdXhfWmZSSm9BcUlJT3RmZ0p4VTFrbGZqeEtUQnFxMzB4NVE?oc=5",
+     "when": "2026-10-23 07:23:52+00:00",
+     "score": -2,
+     "bad_tags": [
+      "Data breach"
+     ],
      "good_tags": []
     }
    ],
    "lean": {
     "label": "Leaning down",
-    "score": -1.7,
-    "confidence": "medium",
+    "score": -3.5,
+    "confidence": "high",
     "reasons": [
-     "headlines are negative (-1.3)",
-     "serious negative news: data breach, probe",
-     "price above its 20- and 50-day averages (uptrend)"
+     "headlines are negative (-1.2)",
+     "serious negative news: data breach",
+     "price below its 20- and 50-day averages (downtrend)"
     ],
-    "p_up": 0.27
+    "p_up": 0.25
    }
   },
   {
    "symbol": "TITAN",
    "name": "Titan",
    "tech": {
-    "last": 4681.42,
-    "prev": 4545.15,
-    "date": "2026-10-22",
-    "day_vol_pct": 1.411207115854161,
-    "range_lo": 4615.35546783698,
-    "range_hi": 4747.48453216302,
-    "change_pct": 2.9981408754386596,
-    "change_5d_pct": 7.836506788414321,
-    "sma20": 4395.082,
-    "sma50": 4351.6238,
-    "rsi": 69.73514714833735,
-    "high_3m": 4681.42,
-    "low_3m": 4171.94,
+    "last": 4299.7001953125,
+    "prev": 4350.0,
+    "date": "2026-10-23",
+    "day_vol_pct": 1.3689902030666488,
+    "range_lo": 4240.837720877435,
+    "range_hi": 4358.562669747565,
+    "change_pct": -1.1563173491379364,
+    "change_5d_pct": -3.503290457771091,
+    "sma20": 4513.830004882812,
+    "sma50": 4816.5080078125,
+    "rsi": 33.20893482894952,
+    "high_3m": 5169.2001953125,
+    "low_3m": 4299.7001953125,
     "spark": [
-     4402.59,
-     4318.44,
-     4375.46,
-     4344.16,
-     4327.66,
-     4334.26,
-     4349.61,
-     4303.11,
-     4313.93,
-     4341.22,
-     4389.06,
-     4353.71,
-     4439.11,
-     4545.15,
-     4681.42
+     4515.7001953125,
+     4580.0,
+     4550.0,
+     4377.0,
+     4359.5,
+     4410.0,
+     4400.0,
+     4487.0,
+     4444.0,
+     4455.7998046875,
+     4444.7998046875,
+     4424.2001953125,
+     4380.89990234375,
+     4350.0,
+     4299.7001953125
     ]
    },
    "news": {
-    "score": 0.33,
+    "score": -0.38,
     "tone": "mixed",
     "flags": [],
     "count": 3
    },
    "headlines": [
     {
-     "title": "Titan jewellery sales rise ahead of festive season",
-     "source": "Demo wire",
-     "link": "",
-     "when": "2026-10-23 11:45:52.365054+05:30",
+     "title": "Titan Co. slips Friday, underperforms market",
+     "source": "MarketWatch",
+     "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQd2hsMmlYLXljM0o5aUV5NmJTQ1NIZDloSEdZTV9hUm9BX09xUGF6M01oVDJ2cnFINXJYR0w2Qnlxelg2YU4yY3pxSHVOWmJxanhIV2lONk5CbTFLNmtHWnhrOXZoLVYwQ2dPMFkwdDlTanBaUnU0OXl5QXBSTFJNNERFYXhxXzg3S3Q0b0FiZVV3cktBdVNsRUd0eVd2MTA?oc=5",
+     "when": "2026-10-23 10:30:00+00:00",
+     "score": -2,
+     "bad_tags": [
+      "Downgrade",
+      "Selling pressure"
+     ],
+     "good_tags": []
+    },
+    {
+     "title": "Stocks To Buy Or Sell: Nagaraj Shetti Of HDFC Securities Picks These Two Shares For Short-Term",
+     "source": "NDTV Profit",
+     "link": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOVkZmX2lrSEEyMUNodU9rdmoyNl9xdXZQRURTdnNxV1Nic3BCQTRjbHBtSHJYOEVnMk45YnJWbXVUSU1UUUVubkJDR0kwaDQzVFY1cGtrNUxid0t3ZFMtMzRJdDJId0lDZTItTG5tNG9pcXN2TWJiSzJYVWpNSmUyMGJaM1psWGItQXIyaFV4RFZRUEJQWGxEcVlfaTMzSVctRzRVT19YWDNKUEtMVG9zaTlVVDdXdUR5bnNLYnZOcXFNMm90QklXZW9mTUtkTm15dWZ30gHbAUFVX3lxTE5obHpMWW5YY09jYk9nWEZEbXNYVkNKTC14Y0FEX1NLVUFtdTVNZ3RremJhZ1BWWi1ta0kwR1l5QUpEcWE5eHhGUjA5OTdkaENVNUZQY3FjMVJJbHotb0ZNVkNYdlNPMWtQVTZFVUZ1eU93UGgzb1diN2NWVkh6SWNNamNlekpROVFEdGNzT0Z2ek5oSlVhR2d5N2ZUWW43a0pjODAzX0FaYzhIZVVoNlE2cmpvQ0VZUzBLYmNBV3poSEoyR21Ud0xLUzFCVGZqX3FKTFJLWnlvb3VfYw?oc=5",
+     "when": "2026-10-23 02:27:29+00:00",
      "score": 0,
      "bad_tags": [],
      "good_tags": []
     },
     {
-     "title": "Brokerage raises target on Titan after strong update",
-     "source": "Demo wire",
-     "link": "",
-     "when": "2026-10-23 06:45:52.365054+05:30",
+     "title": "Dividend, bonus, split: Last chance to buy today ahead of record date - TechM, IRFC, LTM ; Payout, ratio, other details",
+     "source": "Livemint",
+     "link": "https://news.google.com/rss/articles/CBMiigJBVV95cUxNQkk0QmtncF9HcFhBYUY3a2w1ZktyVnBQd3dzaGhoQTlGSmdfSHQyMlc3SC1xTWJLZnlhZXlmQThucnFRNVhoZnZSMTJjNUF3alowblZjNXhuS3hCZzBsdlVVMHFURTF1WVJCeTVFemZfWWVTU0J4VjdLdXdiR2JuLXBNZHdNMlZUdGxwaUo4djkxMjh4dS1ISXFiUV9zNnhMVjEwLWRnMmVuNWxGUzllaktrSlNtNzBQaXdEZXF6TkJPSEJia1dsUlhEVUpGRFp3R2NKZWE4clZFd2lPM3FIdTJpdTVEQk5RT05XeU1xQnJMNXdmZm9FWU1LNnZYYVdwOHJWNXpUOUpHUdIBjwJBVV95cUxPZkU1bnA2emxFeG1VODNLdEc5WnpUR296YndJSDZobmxqa0M4cnRfU19TZUdmM1VRbEZqaDg4RHM2Q2NDV0N1WkxuYno3bllycGVXeGJfRjAwM1dtenZKaGNkdGViY0JHbnMtVUM4Y01kMmM0QXNUVkc2OU1leGwzakx0dUtzVW1OVTIxdWVnYzFCaTNuZFFZcUY3N3p5QVN0T255Q0JyYVAwRWZJV0lRMmZkeGFMVUtOalJCVHlBWGd0M202SHM1M2NISk53V1daYzJQWWZvNmVxd19pSUNBT2ZSM0c3alhvSlZlMEhpcjhxRjljeS1uZS1NODFuZWY4MWY5d3BqRUQ0dE9fd0Zr?oc=5",
+     "when": "2026-10-23 12:04:19+00:00",
      "score": 1,
      "bad_tags": [],
      "good_tags": [
-      "Upgrade"
+      "Shareholder reward"
      ]
-    },
-    {
-     "title": "Gold price dip seen helping Titan demand",
-     "source": "Demo wire",
-     "link": "",
-     "when": "2026-10-23 01:45:52.365054+05:30",
-     "score": 0,
-     "bad_tags": [],
-     "good_tags": []
     }
    ],
    "lean": {
-    "label": "Leaning up",
-    "score": 2.2,
+    "label": "Leaning down",
+    "score": -1.8,
     "confidence": "medium",
     "reasons": [
-     "headlines are mixed (+0.3)",
-     "price above its 20- and 50-day averages (uptrend)",
-     "closed +3.0% yesterday (momentum)"
+     "headlines are mixed (-0.4)",
+     "price below its 20- and 50-day averages (downtrend)"
     ],
-    "p_up": 0.75
+    "p_up": 0.26
    }
   }
  ],
@@ -293,60 +290,67 @@
    "name": "Brent crude",
    "unit": "US$ per barrel",
    "tech": {
-    "last": 90.92,
-    "prev": 89.05,
-    "date": "2026-10-22",
-    "day_vol_pct": 1.1855238414321818,
-    "range_lo": 89.84212172336987,
-    "range_hi": 91.99787827663013,
-    "change_pct": 2.099943851768682,
-    "change_5d_pct": 0.9549189429269411,
-    "sma20": 89.4315,
-    "sma50": 84.334,
-    "rsi": 62.50000000000001,
-    "high_3m": 92.18,
-    "low_3m": 76.07,
+    "last": 116.72000122070312,
+    "prev": 113.16999816894531,
+    "date": "2026-10-23",
+    "day_vol_pct": 1.8435845622072955,
+    "range_lo": 114.56816929719007,
+    "range_hi": 118.87183314421618,
+    "change_pct": 3.136876477154482,
+    "change_5d_pct": 6.244311462078378,
+    "sma20": 105.86449966430663,
+    "sma50": 100.83139938354492,
+    "rsi": 88.13952489825408,
+    "high_3m": 116.72000122070312,
+    "low_3m": 79.36000061035156,
     "spark": [
-     87.42,
-     89.18,
-     90.72,
-     91.22,
-     91.04,
-     92.12,
-     91.83,
-     92.18,
-     90.43,
-     90.06,
-     91.71,
-     90.67,
-     89.13,
-     89.05,
-     90.92
+     100.31999969482422,
+     100.58000183105469,
+     100.19999694824219,
+     104.27999877929688,
+     104.72000122070312,
+     106.6500015258789,
+     105.69000244140625,
+     106.05999755859375,
+     105.91999816894531,
+     109.86000061035156,
+     109.55000305175781,
+     108.79000091552734,
+     108.81999969482422,
+     113.16999816894531,
+     116.72000122070312
     ]
    },
    "news": {
-    "score": -0.5,
-    "tone": "negative",
+    "score": 0.0,
+    "tone": "mixed",
     "flags": [],
-    "count": 2
+    "count": 3
    },
    "headlines": [
     {
-     "title": "Brent crude slips as OPEC+ signals output increase",
-     "source": "Demo wire",
-     "link": "",
-     "when": "2026-10-23 11:45:52.365054+05:30",
-     "score": -1,
-     "bad_tags": [
-      "Selling pressure"
-     ],
+     "title": "Indian equities extend losses as Brent crude hits six-month high",
+     "source": "DD News",
+     "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNNl9BZzNmWkVobVp1eUNraFp3SjJEZF9Ec1QtZEI4X3FsYTdrQThyTnB6TUhCcUxyVTFzTVUtRFV3WjZ6RUFxRzN0LTJmR3Jsb21MRU44R0FpVzBCZExsNVk3YXEwdUtGQkRUYTFoWExjOFoycDB1cXpnTW5YN3RFSXZ5M2VlQ3haeTJlVkRTRGQ1UFBq?oc=5",
+     "when": "2026-10-24 06:08:11+00:00",
+     "score": 0,
+     "bad_tags": [],
      "good_tags": []
     },
     {
-     "title": "Oil steadies after US inventory draw",
-     "source": "Demo wire",
-     "link": "",
-     "when": "2026-10-23 06:45:52.365054+05:30",
+     "title": "Brent crude oil tops $116, a six-month high, as tensions swell in the Middle East",
+     "source": "CNBC",
+     "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNSVBHUDhjeG5sQkpOblUzQm9hSTdWRkduWHJwNXdibUgyM1FHNEtJeFpnWEVQclk1czRKV2hLbHNGS2FYem5sRzJ0N0sxakctZld4QmN4UnozQ2h3ZGFBcE1NZDdESDVRTkVQSTRVMUdxbUtHTnk2anV6Z3h4cmtmOU5COXTSAYoBQVVfeXFMT1RHRzc0UlM1VlFlakxiSU51Mk9FTXNoYndtX2tpb3RNQVNRQ1J5dGs2YnFYQUFxa0I3UUV4OHNkZFBRTVhGcjJ2SWpuQldna1VuM2VqQngyMHJXTW1YWXlPbUY4UE9CZklMbFdwQzdiMGlhS0xteVoydTEwNGlKdzhDSFRKQnZiNXJR?oc=5",
+     "when": "2026-10-23 09:02:44+00:00",
+     "score": 0,
+     "bad_tags": [],
+     "good_tags": []
+    },
+    {
+     "title": "Brent crude tops $116 as traders price escalating Middle East conflict",
+     "source": "Yahoo Finance",
+     "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOTGZKbUc5SzJVQVNZX0VMSjRlVERhSkxKOWppN3pvcVo5b05xbWhYaDZtS2VXY1ZiRHVqM3ZyVXFNSF9MTmFjWFNHbGhDMG1CR1BBXy1nSkVuVWdyZ2JySHdrMTFuY1h6cmhyZTBMZDFzTzh3NGxHcHR2Nld3LS1sOEtGX3Nxd0VTR21YUE9sN3htMDRKeW82b2NxdkVoNUc3WXlETlVXZTktVHJHdUNha2Vmc1lGZUpkYWgxbQ?oc=5",
+     "when": "2026-10-23 19:28:00+00:00",
      "score": 0,
      "bad_tags": [],
      "good_tags": []
@@ -360,15 +364,15 @@
    "strike": 990.0,
    "type": "CE",
    "expiry": "2026-10-27",
-   "sessions": 3,
-   "last": 1017.18,
-   "dist_pct": -2.672093434790298,
-   "ranges": -2.6735435455037377,
-   "verdict": "Watch",
+   "sessions": 2,
+   "last": 958.5999755859375,
+   "dist_pct": 3.2756128952402124,
+   "ranges": 2.911433112262746,
+   "verdict": "Lottery ticket",
    "notes": [
-    "in the money",
+    "3.3% away = 2.9 usual days of movement",
     "serious negative news against a call",
-    "3 sessions left"
+    "2 session(s) left: decay is fastest now"
    ]
   },
   {
@@ -376,14 +380,14 @@
    "strike": 4300.0,
    "type": "PE",
    "expiry": "2026-10-27",
-   "sessions": 3,
-   "last": 4681.42,
-   "dist_pct": 8.147527886837755,
-   "ranges": 5.773445864398369,
-   "verdict": "Lottery ticket",
+   "sessions": 2,
+   "last": 4299.7001953125,
+   "dist_pct": -0.006972688184791227,
+   "ranges": -0.005093307584796328,
+   "verdict": "Healthy",
    "notes": [
-    "8.1% away = 5.8 usual days of movement",
-    "3 sessions left"
+    "in the money",
+    "2 session(s) left: decay is fastest now"
    ]
   },
   {
@@ -391,15 +395,15 @@
    "strike": 24.0,
    "type": "CE",
    "expiry": "2026-10-27",
-   "sessions": 3,
-   "last": 16.96,
-   "dist_pct": 41.50943396226414,
-   "ranges": 49.59298071691888,
+   "sessions": 2,
+   "last": 15.800000190734863,
+   "dist_pct": 51.89873234352,
+   "ranges": 14.71576955841703,
    "verdict": "Lottery ticket",
    "notes": [
-    "41.5% away = 49.6 usual days of movement",
+    "51.9% away = 14.7 usual days of movement",
     "serious negative news against a call",
-    "3 sessions left"
+    "2 session(s) left: decay is fastest now"
    ]
   }
  ]
