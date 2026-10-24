@@ -1,0 +1,406 @@
+{
+ "built_at": "2026-10-23T14:45:52.365054+05:30",
+ "tz": "Asia/Kolkata",
+ "mood": [
+  {
+   "name": "Nifty 50",
+   "last": 21328.96,
+   "change_pct": -1.265145406082513,
+   "date": "2026-10-22"
+  },
+  {
+   "name": "S&P 500 (US, overnight)",
+   "last": 5841.26,
+   "change_pct": 0.15877914951989425,
+   "date": "2026-10-22"
+  },
+  {
+   "name": "USD/INR",
+   "last": 90.09,
+   "change_pct": -0.2767323444764269,
+   "date": "2026-10-22"
+  }
+ ],
+ "stocks": [
+  {
+   "symbol": "YESBANK",
+   "name": "Yes Bank",
+   "tech": {
+    "last": 16.96,
+    "prev": 16.79,
+    "date": "2026-10-22",
+    "day_vol_pct": 0.8370021999525227,
+    "range_lo": 16.818044426888054,
+    "range_hi": 17.10195557311195,
+    "change_pct": 1.0125074449076843,
+    "change_5d_pct": -0.3525264394829586,
+    "sma20": 16.8965,
+    "sma50": 17.8714,
+    "rsi": 52.903225806451616,
+    "high_3m": 21.3,
+    "low_3m": 16.7,
+    "spark": [
+     16.87,
+     16.8,
+     16.72,
+     16.76,
+     16.72,
+     16.71,
+     16.7,
+     17.02,
+     16.89,
+     17.02,
+     17.08,
+     16.94,
+     17.04,
+     16.79,
+     16.96
+    ]
+   },
+   "news": {
+    "score": -1.33,
+    "tone": "negative",
+    "flags": [
+     "Court case"
+    ],
+    "count": 3
+   },
+   "headlines": [
+    {
+     "title": "Supreme Court rules against Yes Bank in AT-1 bond write-off case",
+     "source": "Demo wire",
+     "link": "",
+     "when": "2026-10-23 11:45:52.365054+05:30",
+     "score": -2,
+     "bad_tags": [
+      "Court case"
+     ],
+     "good_tags": []
+    },
+    {
+     "title": "Yes Bank shares fall 6% after apex court verdict",
+     "source": "Demo wire",
+     "link": "",
+     "when": "2026-10-23 06:45:52.365054+05:30",
+     "score": -3,
+     "bad_tags": [
+      "Court case",
+      "Selling pressure"
+     ],
+     "good_tags": []
+    },
+    {
+     "title": "SMBC completes additional stake purchase in Yes Bank",
+     "source": "Demo wire",
+     "link": "",
+     "when": "2026-10-23 01:45:52.365054+05:30",
+     "score": 1,
+     "bad_tags": [],
+     "good_tags": [
+      "Deal or investment"
+     ]
+    }
+   ],
+   "lean": {
+    "label": "Leaning down",
+    "score": -2.7,
+    "confidence": "medium",
+    "reasons": [
+     "headlines are negative (-1.3)",
+     "serious negative news: court case",
+     "trend is sideways"
+    ],
+    "p_up": 0.25
+   }
+  },
+  {
+   "symbol": "SBIN",
+   "name": "SBI",
+   "tech": {
+    "last": 1017.18,
+    "prev": 1019.33,
+    "date": "2026-10-22",
+    "day_vol_pct": 0.9994576072209937,
+    "range_lo": 1007.0137171108694,
+    "range_hi": 1027.3462828891304,
+    "change_pct": -0.210922861095042,
+    "change_5d_pct": -0.7232161157145756,
+    "sma20": 988.775,
+    "sma50": 963.2022000000001,
+    "rsi": 70.87814940327092,
+    "high_3m": 1034.47,
+    "low_3m": 916.54,
+    "spark": [
+     960.5,
+     965.87,
+     969.73,
+     976.05,
+     972.0,
+     995.12,
+     999.48,
+     1017.21,
+     1034.47,
+     1024.59,
+     1004.87,
+     1021.04,
+     1017.31,
+     1019.33,
+     1017.18
+    ]
+   },
+   "news": {
+    "score": -1.33,
+    "tone": "negative",
+    "flags": [
+     "Data breach",
+     "Probe"
+    ],
+    "count": 3
+   },
+   "headlines": [
+    {
+     "title": "SBI confirms probe into alleged customer data breach",
+     "source": "Demo wire",
+     "link": "",
+     "when": "2026-10-23 11:45:52.365054+05:30",
+     "score": -3,
+     "bad_tags": [
+      "Data breach",
+      "Probe"
+     ],
+     "good_tags": []
+    },
+    {
+     "title": "SBI shares slip as investors weigh cyber incident",
+     "source": "Demo wire",
+     "link": "",
+     "when": "2026-10-23 06:45:52.365054+05:30",
+     "score": -1,
+     "bad_tags": [
+      "Selling pressure"
+     ],
+     "good_tags": []
+    },
+    {
+     "title": "SBI Q2 preview: analysts expect steady loan growth",
+     "source": "Demo wire",
+     "link": "",
+     "when": "2026-10-23 01:45:52.365054+05:30",
+     "score": 0,
+     "bad_tags": [],
+     "good_tags": []
+    }
+   ],
+   "lean": {
+    "label": "Leaning down",
+    "score": -1.7,
+    "confidence": "medium",
+    "reasons": [
+     "headlines are negative (-1.3)",
+     "serious negative news: data breach, probe",
+     "price above its 20- and 50-day averages (uptrend)"
+    ],
+    "p_up": 0.27
+   }
+  },
+  {
+   "symbol": "TITAN",
+   "name": "Titan",
+   "tech": {
+    "last": 4681.42,
+    "prev": 4545.15,
+    "date": "2026-10-22",
+    "day_vol_pct": 1.411207115854161,
+    "range_lo": 4615.35546783698,
+    "range_hi": 4747.48453216302,
+    "change_pct": 2.9981408754386596,
+    "change_5d_pct": 7.836506788414321,
+    "sma20": 4395.082,
+    "sma50": 4351.6238,
+    "rsi": 69.73514714833735,
+    "high_3m": 4681.42,
+    "low_3m": 4171.94,
+    "spark": [
+     4402.59,
+     4318.44,
+     4375.46,
+     4344.16,
+     4327.66,
+     4334.26,
+     4349.61,
+     4303.11,
+     4313.93,
+     4341.22,
+     4389.06,
+     4353.71,
+     4439.11,
+     4545.15,
+     4681.42
+    ]
+   },
+   "news": {
+    "score": 0.33,
+    "tone": "mixed",
+    "flags": [],
+    "count": 3
+   },
+   "headlines": [
+    {
+     "title": "Titan jewellery sales rise ahead of festive season",
+     "source": "Demo wire",
+     "link": "",
+     "when": "2026-10-23 11:45:52.365054+05:30",
+     "score": 0,
+     "bad_tags": [],
+     "good_tags": []
+    },
+    {
+     "title": "Brokerage raises target on Titan after strong update",
+     "source": "Demo wire",
+     "link": "",
+     "when": "2026-10-23 06:45:52.365054+05:30",
+     "score": 1,
+     "bad_tags": [],
+     "good_tags": [
+      "Upgrade"
+     ]
+    },
+    {
+     "title": "Gold price dip seen helping Titan demand",
+     "source": "Demo wire",
+     "link": "",
+     "when": "2026-10-23 01:45:52.365054+05:30",
+     "score": 0,
+     "bad_tags": [],
+     "good_tags": []
+    }
+   ],
+   "lean": {
+    "label": "Leaning up",
+    "score": 2.2,
+    "confidence": "medium",
+    "reasons": [
+     "headlines are mixed (+0.3)",
+     "price above its 20- and 50-day averages (uptrend)",
+     "closed +3.0% yesterday (momentum)"
+    ],
+    "p_up": 0.75
+   }
+  }
+ ],
+ "commodities": [
+  {
+   "name": "Brent crude",
+   "unit": "US$ per barrel",
+   "tech": {
+    "last": 90.92,
+    "prev": 89.05,
+    "date": "2026-10-22",
+    "day_vol_pct": 1.1855238414321818,
+    "range_lo": 89.84212172336987,
+    "range_hi": 91.99787827663013,
+    "change_pct": 2.099943851768682,
+    "change_5d_pct": 0.9549189429269411,
+    "sma20": 89.4315,
+    "sma50": 84.334,
+    "rsi": 62.50000000000001,
+    "high_3m": 92.18,
+    "low_3m": 76.07,
+    "spark": [
+     87.42,
+     89.18,
+     90.72,
+     91.22,
+     91.04,
+     92.12,
+     91.83,
+     92.18,
+     90.43,
+     90.06,
+     91.71,
+     90.67,
+     89.13,
+     89.05,
+     90.92
+    ]
+   },
+   "news": {
+    "score": -0.5,
+    "tone": "negative",
+    "flags": [],
+    "count": 2
+   },
+   "headlines": [
+    {
+     "title": "Brent crude slips as OPEC+ signals output increase",
+     "source": "Demo wire",
+     "link": "",
+     "when": "2026-10-23 11:45:52.365054+05:30",
+     "score": -1,
+     "bad_tags": [
+      "Selling pressure"
+     ],
+     "good_tags": []
+    },
+    {
+     "title": "Oil steadies after US inventory draw",
+     "source": "Demo wire",
+     "link": "",
+     "when": "2026-10-23 06:45:52.365054+05:30",
+     "score": 0,
+     "bad_tags": [],
+     "good_tags": []
+    }
+   ]
+  }
+ ],
+ "options": [
+  {
+   "symbol": "SBIN",
+   "strike": 990.0,
+   "type": "CE",
+   "expiry": "2026-10-27",
+   "sessions": 3,
+   "last": 1017.18,
+   "dist_pct": -2.672093434790298,
+   "ranges": -2.6735435455037377,
+   "verdict": "Watch",
+   "notes": [
+    "in the money",
+    "serious negative news against a call",
+    "3 sessions left"
+   ]
+  },
+  {
+   "symbol": "TITAN",
+   "strike": 4300.0,
+   "type": "PE",
+   "expiry": "2026-10-27",
+   "sessions": 3,
+   "last": 4681.42,
+   "dist_pct": 8.147527886837755,
+   "ranges": 5.773445864398369,
+   "verdict": "Lottery ticket",
+   "notes": [
+    "8.1% away = 5.8 usual days of movement",
+    "3 sessions left"
+   ]
+  },
+  {
+   "symbol": "YESBANK",
+   "strike": 24.0,
+   "type": "CE",
+   "expiry": "2026-10-27",
+   "sessions": 3,
+   "last": 16.96,
+   "dist_pct": 41.50943396226414,
+   "ranges": 49.59298071691888,
+   "verdict": "Lottery ticket",
+   "notes": [
+    "41.5% away = 49.6 usual days of movement",
+    "serious negative news against a call",
+    "3 sessions left"
+   ]
+  }
+ ]
+}

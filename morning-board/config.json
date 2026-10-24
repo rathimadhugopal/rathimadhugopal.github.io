@@ -1,0 +1,64 @@
+{
+  "timezone": "Asia/Kolkata",
+  "stocks": [
+    {
+      "symbol": "YESBANK",
+      "name": "Yes Bank",
+      "search": "\"Yes Bank\""
+    },
+    {
+      "symbol": "SBIN",
+      "name": "SBI",
+      "search": "\"State Bank of India\" OR \"SBI\" bank"
+    },
+    {
+      "symbol": "TITAN",
+      "name": "Titan",
+      "search": "\"Titan Company\" OR \"Titan\" shares"
+    }
+  ],
+  "commodities": [
+    {
+      "ticker": "BZ=F",
+      "name": "Brent crude",
+      "search": "Brent crude oil price",
+      "unit": "US$ per barrel"
+    }
+  ],
+  "market_mood": [
+    {
+      "ticker": "^NSEI",
+      "name": "Nifty 50"
+    },
+    {
+      "ticker": "^GSPC",
+      "name": "S&P 500 (US, overnight)"
+    },
+    {
+      "ticker": "INR=X",
+      "name": "USD/INR"
+    }
+  ],
+  "headlines_per_item": 3,
+  "news_window": "when:2d",
+  "options": [
+    {
+      "symbol": "SBIN",
+      "strike": 990,
+      "type": "CE",
+      "expiry": "2026-10-27"
+    },
+    {
+      "symbol": "TITAN",
+      "strike": 4300,
+      "type": "PE",
+      "expiry": "2026-10-27"
+    },
+    {
+      "symbol": "YESBANK",
+      "strike": 24,
+      "type": "CE",
+      "expiry": "2026-10-27"
+    }
+  ]
+}
