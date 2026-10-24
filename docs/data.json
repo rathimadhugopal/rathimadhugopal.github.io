@@ -1,5 +1,5 @@
 {
- "built_at": "2026-10-24T15:40:36.959495+05:30",
+ "built_at": "2026-10-24T15:43:18.783398+05:30",
  "tz": "Asia/Kolkata",
  "mood": [
   {
@@ -234,12 +234,24 @@
     ]
    },
    "news": {
-    "score": 0.0,
+    "score": -0.38,
     "tone": "mixed",
     "flags": [],
     "count": 3
    },
    "headlines": [
+    {
+     "title": "Titan Co. slips Friday, underperforms market",
+     "source": "MarketWatch",
+     "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQd2hsMmlYLXljM0o5aUV5NmJTQ1NIZDloSEdZTV9hUm9BX09xUGF6M01oVDJ2cnFINXJYR0w2Qnlxelg2YU4yY3pxSHVOWmJxanhIV2lONk5CbTFLNmtHWnhrOXZoLVYwQ2dPMFkwdDlTanBaUnU0OXl5QXBSTFJNNERFYXhxXzg3S3Q0b0FiZVV3cktBdVNsRUd0eVd2MTA?oc=5",
+     "when": "2026-10-23 10:30:00+00:00",
+     "score": -2,
+     "bad_tags": [
+      "Downgrade",
+      "Selling pressure"
+     ],
+     "good_tags": []
+    },
     {
      "title": "Stocks To Buy Or Sell: Nagaraj Shetti Of HDFC Securities Picks These Two Shares For Short-Term",
      "source": "NDTV Profit",
@@ -250,33 +262,113 @@
      "good_tags": []
     },
     {
-     "title": "FuelEU pooling nearly triples bio-LNG share for Dutch bunker supplier Titan",
-     "source": "Portnews",
-     "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTFBlOURoekJISmRDTGtWQlA4RmJhd2VWLUlqVzZhS0lZRXpDeWpSb2ZLWG1jeUVhWi1FS19RRlBRODZMd2NSVjA2MEZTSQ?oc=5",
-     "when": "2026-10-22 11:25:00+00:00",
-     "score": 0,
+     "title": "Dividend, bonus, split: Last chance to buy today ahead of record date - TechM, IRFC, LTM ; Payout, ratio, other details",
+     "source": "Livemint",
+     "link": "https://news.google.com/rss/articles/CBMiigJBVV95cUxNQkk0QmtncF9HcFhBYUY3a2w1ZktyVnBQd3dzaGhoQTlGSmdfSHQyMlc3SC1xTWJLZnlhZXlmQThucnFRNVhoZnZSMTJjNUF3alowblZjNXhuS3hCZzBsdlVVMHFURTF1WVJCeTVFemZfWWVTU0J4VjdLdXdiR2JuLXBNZHdNMlZUdGxwaUo4djkxMjh4dS1ISXFiUV9zNnhMVjEwLWRnMmVuNWxGUzllaktrSlNtNzBQaXdEZXF6TkJPSEJia1dsUlhEVUpGRFp3R2NKZWE4clZFd2lPM3FIdTJpdTVEQk5RT05XeU1xQnJMNXdmZm9FWU1LNnZYYVdwOHJWNXpUOUpHUdIBjwJBVV95cUxPZkU1bnA2emxFeG1VODNLdEc5WnpUR296YndJSDZobmxqa0M4cnRfU19TZUdmM1VRbEZqaDg4RHM2Q2NDV0N1WkxuYno3bllycGVXeGJfRjAwM1dtenZKaGNkdGViY0JHbnMtVUM4Y01kMmM0QXNUVkc2OU1leGwzakx0dUtzVW1OVTIxdWVnYzFCaTNuZFFZcUY3N3p5QVN0T255Q0JyYVAwRWZJV0lRMmZkeGFMVUtOalJCVHlBWGd0M202SHM1M2NISk53V1daYzJQWWZvNmVxd19pSUNBT2ZSM0c3alhvSlZlMEhpcjhxRjljeS1uZS1NODFuZWY4MWY5d3BqRUQ0dE9fd0Zr?oc=5",
+     "when": "2026-10-23 12:04:19+00:00",
+     "score": 1,
      "bad_tags": [],
+     "good_tags": [
+      "Shareholder reward"
+     ]
+    }
+   ],
+   "lean": {
+    "label": "Leaning down",
+    "score": -1.8,
+    "confidence": "medium",
+    "reasons": [
+     "headlines are mixed (-0.4)",
+     "price below its 20- and 50-day averages (downtrend)"
+    ],
+    "p_up": 0.26
+   }
+  },
+  {
+   "symbol": "Swiggy",
+   "name": "Swiggy",
+   "tech": {
+    "last": 176.0,
+    "prev": 211.39999389648438,
+    "date": "2026-10-23",
+    "day_vol_pct": 3.9791090068862425,
+    "range_lo": 168.99676814788023,
+    "range_hi": 183.0032318521198,
+    "change_pct": -16.745503745765756,
+    "change_5d_pct": -23.14410480349345,
+    "sma20": 236.24749984741212,
+    "sma50": 261.25799957275393,
+    "rsi": 16.809419672599304,
+    "high_3m": 295.9100036621094,
+    "low_3m": 176.0,
+    "spark": [
+     238.0,
+     238.8000030517578,
+     244.1999969482422,
+     246.0,
+     234.9499969482422,
+     234.1999969482422,
+     230.0,
+     232.39999389648438,
+     230.9499969482422,
+     229.0,
+     234.3000030517578,
+     229.0,
+     223.64999389648438,
+     211.39999389648438,
+     176.0
+    ]
+   },
+   "news": {
+    "score": -0.71,
+    "tone": "negative",
+    "flags": [],
+    "count": 3
+   },
+   "headlines": [
+    {
+     "title": "India's Swiggy falls to record low as quick-commerce losses widen",
+     "source": "Reuters",
+     "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNbk9pX1l2cmZDU29vWmJMNEUxMm1DakxYdi1BS3FwMWQxVlN1T3R6RDl6Q1JMeUVxbDBxU0lfZmZFdWdzSkpxVGZDRU9BVkVBUzlabEtralRkUWZ1Vk5lVUl2S3dqZHVFdXIyUk9VSWhlQy10WjV4MnVaZFJEU05FN00zbFZhS3VGaHFiZ0p4ZE55bmhLemFWdDlJc0JveXA5Zi1NN2lhdmliX2tuUDNJd0NUOWxfSk5nS2dZQ0owX1k?oc=5",
+     "when": "2026-10-23 03:51:00+00:00",
+     "score": -1,
+     "bad_tags": [
+      "Selling pressure"
+     ],
      "good_tags": []
     },
     {
-     "title": "4 Largecap 2027 Stock Picks to Watch for Future Multibagger Potential: Titan, JSW Steel, Bajaj Auto and Divi's Labs",
-     "source": "Univest",
-     "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPQk9PdmItakV0RlFxam9XUkNFcXp4LUFrMm5YaGFCa2tCMVZKeGYxc2ZWRG95WktSTFFXWXNTUWNoWmgzZVVTRnRzcFpaenYxeWpyX1FiQktTMGFqTEp2dDQyY2F2TjNtajV1TnNrOF9KbEx5bThvLS1EVDZOTVhtX3lPMFRLVklW?oc=5",
-     "when": "2026-10-23 03:58:00+00:00",
+     "title": "Swiggy Shares Plunge After Losses Mount on Intense Competition",
+     "source": "Bloomberg",
+     "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPcUNFNXpBSUwyVDRQLWRRNVdWd3FNdksxSGVNWWVsVG1xeGdtRTZZLWxiZEtJYkpXQlJRQTdSRmhiQ1JLVzZ2d2NmVFVrT1FqV040X01vc1drSEJ0VHRmdzg2Zkh5WXNHbkQ5b1NiVjBZQzk1VURBU3ZuNW5iaWxNMUZ1UXhHekozazhjRE4tUU85RktKdDdQMEo2Rmc0M0hlUm1ZUm9XTXBIekF1MzVWMEZxOA?oc=5",
+     "when": "2026-10-23 11:46:09+00:00",
+     "score": -1,
+     "bad_tags": [
+      "Selling pressure"
+     ],
+     "good_tags": []
+    },
+    {
+     "title": "Swiggy shares hit 15% lower circuit post-Q2 results; brokerages cut target prices over profitability...",
+     "source": "Moneycontrol.com",
+     "link": "https://news.google.com/rss/articles/CBMiggJBVV95cUxOdWJTTW5QYjBSNEc0YTZobE4xZDNIU0IxWktkalNUQm5pUzdvR2dKa1p5cGgwTF9sNE93c0pqVjVqd0NYdUJ5YXRBb2oyYm5ieTFDeEtIQ05PXzN4RWVablFjeldJR0Y2WWdxWHRuempGdGVnTGZnUlZ0LW9rWEJsTGNKZExFa05KQXZBOTF6RzZWTmNaeGJVUkNoTXBUdTVlMDJ6TTJRb0pOOFJTRE81VDcxclpDZWppMUpmTWNrR01haTFyVnpXeWlOdmV6b2ZJZGRHd01fWlpuRlJKckc1VFR4SmhlUTkzWFdyeS1VX1huQnpZQkltVnJ1Y1N2M19IRXfSAYcCQVVfeXFMTjZQRjFlblVrNTZnZzRqakc4UDdNYzNwMlpicVNyc3NaaEdlM2FLbkpzd0U5MmVqZi1hSWZCUzV4bzJRdC1VR21HMFVSSm92emdFUzVvVEpEblVqRmZ1OS1yNFNWWDlTcE9xNzM4Y3RqSVBreExteGlPZ3Q2ZWlmeDRHTkFhV25YV0l6bUI0UG5mTjJGNDFVaGY5Z2NXZ015WEZOTTFZX3VKdFV2ZlRtdGFhUmJyNlRpVG1fSzZ1aDRtTVN2aUdubjZJNUp2LXdhRUQ5eDFQTXdQM2ZTNDl3NGRBWUNnems0MV9yTGxZbmplWkhWbUsyZ00xTTdkX25YVmQ1RXFVVlU?oc=5",
+     "when": "2026-10-23 04:18:04+00:00",
      "score": 0,
      "bad_tags": [],
      "good_tags": []
     }
    ],
    "lean": {
-    "label": "No clear lean",
-    "score": -1.0,
-    "confidence": "low",
+    "label": "Leaning down",
+    "score": -2.4,
+    "confidence": "medium",
     "reasons": [
-     "headlines are mixed (+0.0)",
-     "price below its 20- and 50-day averages (downtrend)"
+     "headlines are negative (-0.7)",
+     "price below its 20- and 50-day averages (downtrend)",
+     "closed -16.7% yesterday (pressure)",
+     "RSI 17: oversold, bounce possible"
     ],
-    "p_up": 0.35
+    "p_up": 0.25
    }
   }
  ],
