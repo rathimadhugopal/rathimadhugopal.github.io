@@ -1,5 +1,5 @@
 {
- "built_at": "2026-10-24T15:19:51.909152+05:30",
+ "built_at": "2026-10-24T15:40:36.959495+05:30",
  "tz": "Asia/Kolkata",
  "mood": [
   {
@@ -234,24 +234,12 @@
     ]
    },
    "news": {
-    "score": -0.38,
+    "score": 0.0,
     "tone": "mixed",
     "flags": [],
     "count": 3
    },
    "headlines": [
-    {
-     "title": "Titan Co. slips Friday, underperforms market",
-     "source": "MarketWatch",
-     "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQd2hsMmlYLXljM0o5aUV5NmJTQ1NIZDloSEdZTV9hUm9BX09xUGF6M01oVDJ2cnFINXJYR0w2Qnlxelg2YU4yY3pxSHVOWmJxanhIV2lONk5CbTFLNmtHWnhrOXZoLVYwQ2dPMFkwdDlTanBaUnU0OXl5QXBSTFJNNERFYXhxXzg3S3Q0b0FiZVV3cktBdVNsRUd0eVd2MTA?oc=5",
-     "when": "2026-10-23 10:30:00+00:00",
-     "score": -2,
-     "bad_tags": [
-      "Downgrade",
-      "Selling pressure"
-     ],
-     "good_tags": []
-    },
     {
      "title": "Stocks To Buy Or Sell: Nagaraj Shetti Of HDFC Securities Picks These Two Shares For Short-Term",
      "source": "NDTV Profit",
@@ -262,26 +250,33 @@
      "good_tags": []
     },
     {
-     "title": "Dividend, bonus, split: Last chance to buy today ahead of record date - TechM, IRFC, LTM ; Payout, ratio, other details",
-     "source": "Livemint",
-     "link": "https://news.google.com/rss/articles/CBMiigJBVV95cUxNQkk0QmtncF9HcFhBYUY3a2w1ZktyVnBQd3dzaGhoQTlGSmdfSHQyMlc3SC1xTWJLZnlhZXlmQThucnFRNVhoZnZSMTJjNUF3alowblZjNXhuS3hCZzBsdlVVMHFURTF1WVJCeTVFemZfWWVTU0J4VjdLdXdiR2JuLXBNZHdNMlZUdGxwaUo4djkxMjh4dS1ISXFiUV9zNnhMVjEwLWRnMmVuNWxGUzllaktrSlNtNzBQaXdEZXF6TkJPSEJia1dsUlhEVUpGRFp3R2NKZWE4clZFd2lPM3FIdTJpdTVEQk5RT05XeU1xQnJMNXdmZm9FWU1LNnZYYVdwOHJWNXpUOUpHUdIBjwJBVV95cUxPZkU1bnA2emxFeG1VODNLdEc5WnpUR296YndJSDZobmxqa0M4cnRfU19TZUdmM1VRbEZqaDg4RHM2Q2NDV0N1WkxuYno3bllycGVXeGJfRjAwM1dtenZKaGNkdGViY0JHbnMtVUM4Y01kMmM0QXNUVkc2OU1leGwzakx0dUtzVW1OVTIxdWVnYzFCaTNuZFFZcUY3N3p5QVN0T255Q0JyYVAwRWZJV0lRMmZkeGFMVUtOalJCVHlBWGd0M202SHM1M2NISk53V1daYzJQWWZvNmVxd19pSUNBT2ZSM0c3alhvSlZlMEhpcjhxRjljeS1uZS1NODFuZWY4MWY5d3BqRUQ0dE9fd0Zr?oc=5",
-     "when": "2026-10-23 12:04:19+00:00",
-     "score": 1,
+     "title": "FuelEU pooling nearly triples bio-LNG share for Dutch bunker supplier Titan",
+     "source": "Portnews",
+     "link": "https://news.google.com/rss/articles/CBMiS0FVX3lxTFBlOURoekJISmRDTGtWQlA4RmJhd2VWLUlqVzZhS0lZRXpDeWpSb2ZLWG1jeUVhWi1FS19RRlBRODZMd2NSVjA2MEZTSQ?oc=5",
+     "when": "2026-10-22 11:25:00+00:00",
+     "score": 0,
      "bad_tags": [],
-     "good_tags": [
-      "Shareholder reward"
-     ]
+     "good_tags": []
+    },
+    {
+     "title": "4 Largecap 2027 Stock Picks to Watch for Future Multibagger Potential: Titan, JSW Steel, Bajaj Auto and Divi's Labs",
+     "source": "Univest",
+     "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPQk9PdmItakV0RlFxam9XUkNFcXp4LUFrMm5YaGFCa2tCMVZKeGYxc2ZWRG95WktSTFFXWXNTUWNoWmgzZVVTRnRzcFpaenYxeWpyX1FiQktTMGFqTEp2dDQyY2F2TjNtajV1TnNrOF9KbEx5bThvLS1EVDZOTVhtX3lPMFRLVklW?oc=5",
+     "when": "2026-10-23 03:58:00+00:00",
+     "score": 0,
+     "bad_tags": [],
+     "good_tags": []
     }
    ],
    "lean": {
-    "label": "Leaning down",
-    "score": -1.8,
-    "confidence": "medium",
+    "label": "No clear lean",
+    "score": -1.0,
+    "confidence": "low",
     "reasons": [
-     "headlines are mixed (-0.4)",
+     "headlines are mixed (+0.0)",
      "price below its 20- and 50-day averages (downtrend)"
     ],
-    "p_up": 0.26
+    "p_up": 0.35
    }
   }
  ],
@@ -330,9 +325,9 @@
    "headlines": [
     {
      "title": "Indian equities extend losses as Brent crude hits six-month high",
-     "source": "DD News",
-     "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNNl9BZzNmWkVobVp1eUNraFp3SjJEZF9Ec1QtZEI4X3FsYTdrQThyTnB6TUhCcUxyVTFzTVUtRFV3WjZ6RUFxRzN0LTJmR3Jsb21MRU44R0FpVzBCZExsNVk3YXEwdUtGQkRUYTFoWExjOFoycDB1cXpnTW5YN3RFSXZ5M2VlQ3haeTJlVkRTRGQ1UFBq?oc=5",
-     "when": "2026-10-24 06:08:11+00:00",
+     "source": "DD India",
+     "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQNkEyWDFPQU9iLWpLQXdrN0IxSDYwQjJFQm0zVU1QbGhJY3h6NkRXaUFaRHhKb3g5cHNhRTlxUkNVV2cwOXg4Q2IxNFMxQ2NjRlpvQUl6YndvRkpuUWh1NTluVkMzajNGRll5OFhDRGVrRnljWHp1b0FpeTh3T2YzN3RVUDBsQTFsZnRNSlJpOElTeXpDZTlxSFNnTQ?oc=5",
+     "when": "2026-10-24 06:12:00+00:00",
      "score": 0,
      "bad_tags": [],
      "good_tags": []
