@@ -26,17 +26,17 @@ flags; that is the real value.
 
 1. **Create a GitHub account** (free) if you don't have one, at github.com.
 2. **Create a new repository** called `morning-board`. Tick "Public" (needed for
-   free Pages hosting) and upload all the files in this folder, keeping the
-   `.github/workflows/` and `docs/` folders as they are.
+   free Pages hosting) and upload the files **inside** this folder (not the
+   folder itself) so `build_board.py` sits at the top level. The `.github` folder
+   is hidden on most computers: if it does not upload, create
+   `.github/workflows/morning-board.yml` with *Add file → Create new file* and
+   paste the workflow in.
 3. **Turn on hosting:** repository → *Settings* → *Pages* → under "Build and
-   deployment", set *Source* to "Deploy from a branch", *Branch* to `main` and
-   folder to `/docs`. Save. After a minute your page is at
+   deployment", set *Source* to **"GitHub Actions"**. Your page will be at
    `https://<your-username>.github.io/morning-board/`.
-4. **Allow the robot to write:** *Settings* → *Actions* → *General* → "Workflow
-   permissions" → choose "Read and write permissions". Save.
-5. **Run it once now:** *Actions* tab → "Morning board" → *Run workflow*. In about
-   a minute the page updates with live news. From then on it runs itself every
-   weekday at 8:15 AM IST.
+4. **Run it once now:** *Actions* tab → "Morning board" → *Run workflow*. In about
+   a minute the page is live. From then on it rebuilds every weekday at 8:15 AM
+   IST and after every push you make.
 6. **On your phone:** open the link in Chrome or Safari and choose "Add to Home
    Screen". It opens like an app.
 
@@ -77,7 +77,7 @@ The run then sends a short summary with the page link.
 ```bash
 pip install httpx
 python build_board.py            # writes docs/index.html with live data
-#python build_board.py --demo     # canned data, clearly labelled, to see the layout
+python build_board.py --demo     # canned data, clearly labelled, to see the layout
 python -m pytest -q test_board.py
 ```
 
@@ -93,4 +93,6 @@ Open `docs/index.html` in any browser.
 - If a run fails (Yahoo or Google hiccup), the previous page stays up and the
   page shows a yellow banner once it is more than 30 hours old. Check the
   *Actions* tab for the error and press *Run workflow* again.
+- The workflow never commits to your repository, so pushing from your editor
+  never conflicts with it.
 - Nothing here is investment advice. Everything is fetched fresh on each run.

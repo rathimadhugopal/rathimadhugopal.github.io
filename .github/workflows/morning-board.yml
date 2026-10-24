@@ -3,14 +3,18 @@ name: Morning board
 on:
   schedule:
     - cron: "45 2 * * 1-5"     # 08:15 IST, Monday to Friday (GitHub cron is UTC)
-  workflow_dispatch:           # "Run workflow" button for a manual refresh any time
+  push:
+    branches: [main]           # every push rebuilds the page
+  workflow_dispatch:           # "Run workflow" button for a manual refresh
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 concurrency:
-  group: morning-board
-  cancel-in-progress: true
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -27,10 +31,16 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           PAGE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
         run: python build_board.py
-      - name: Publish
-        run: |
-          git config user.name "morning-board"
-          git config user.email "actions@users.noreply.github.com"
-          git add docs
-          git diff --quiet --cached || git commit -m "Board for $(TZ=Asia/Kolkata date '+%d %b %Y %H:%M')"
-          git push
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
