@@ -77,7 +77,7 @@ The run then sends a short summary with the page link.
 ```bash
 pip install httpx
 python build_board.py            # writes docs/index.html with live data
-python build_board.py --demo     # canned data, clearly labelled, to see the layout
+#python build_board.py --demo     # canned data, clearly labelled, to see the layout
 python -m pytest -q test_board.py
 ```
 
