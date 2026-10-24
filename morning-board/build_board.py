@@ -557,7 +557,7 @@ def main(argv=None) -> int:
     ap.add_argument("--config", default="config.json")
     ap.add_argument("--out", default="docs/index.html")
     ap.add_argument("--json", default="docs/data.json", help="also write the raw data here ('' to skip)")
-    # ap.add_argument("--demo", action="store_true", help="use canned data, clearly labelled")
+    ap.add_argument("--demo", action="store_true", help="use canned data, clearly labelled")
     ap.add_argument("--page-url", default=os.getenv("PAGE_URL"), help="link to include in the Telegram summary")
     a = ap.parse_args(argv)
 
