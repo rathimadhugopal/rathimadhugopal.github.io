@@ -15,6 +15,11 @@
       "symbol": "TITAN",
       "name": "Titan",
       "search": "\"Titan Company\" OR \"Titan\" shares"
+    },
+    {
+      "symbol": "Swiggy",
+      "name": "Swiggy",
+      "search": "\"Swiggy Ltd\" OR \"Swiggy\" shares"
     }
   ],
   "commodities": [
