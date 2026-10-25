@@ -363,8 +363,8 @@ def headline_html(it: dict, now: dt.datetime) -> str:
 
 def render(data: dict, demo: bool = False) -> str:
     now = dt.datetime.fromisoformat(data["built_at"])
-    day = now.strftime("%A, %d %B %Y")
-    at = now.strftime("%H:%M")
+    day = now.strftime("%a %d %b %Y")
+    at = now.strftime("%H:%M:%S")
     bad_count = sum(1 for s in data["stocks"] if s["news"]["flags"])
 
     mood = ""
@@ -448,7 +448,7 @@ def render(data: dict, demo: bool = False) -> str:
 *{{box-sizing:border-box}}html,body{{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,"Segoe UI",Roboto,sans-serif;font-variant-numeric:tabular-nums}}
 body{{padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}}
 .wrap{{max-width:680px;margin:0 auto;padding:20px 16px 48px}}
-.date{{color:var(--muted);font-size:14px;margin:0}}
+.date{{color:var(--muted);font-size:14px;margin:0}}.date b{{color:var(--ink);font-weight:600}}
 h1{{font-family:"Source Serif 4",Georgia,serif;font-weight:500;font-size:24px;line-height:1.25;margin:4px 0 14px;letter-spacing:-.01em}}
 .banner{{background:var(--amber-bg);color:var(--amber);padding:10px 14px;border-radius:8px;font-size:14px;margin-bottom:14px}}
 .moods{{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:22px}}
@@ -480,7 +480,7 @@ h2{{margin:0;font-size:19px;font-weight:600}}h2 small{{font-weight:400;color:var
 #stale{{display:none}}
 </style></head><body><div class="wrap">
 <button class="theme" id="theme" type="button" aria-label="Switch theme">Theme: auto</button>
-<p class="date">{esc(day)}, built {esc(at)} IST</p>
+<p class="date"><b>Data updated: {esc(day)}, {esc(at)} IST</b> <span id="ago"></span></p>
 <h1>{esc(headline)}</h1>
 <div id="stale" class="banner">This page is more than a day old. The morning run may have failed; check the GitHub Actions tab.</div>
 {demo_banner}
@@ -497,7 +497,7 @@ h2{{margin:0;font-size:19px;font-weight:600}}h2 small{{font-weight:400;color:var
 function ap(v){{if(v==="auto")r.removeAttribute("data-theme");else r.setAttribute("data-theme",v);b.textContent="Theme: "+v;}}
 var cur="auto";try{{cur=localStorage.getItem(k)||"auto";}}catch(e){{}}ap(cur);
 b.onclick=function(){{cur=m[(m.indexOf(cur)+1)%3];try{{localStorage.setItem(k,cur);}}catch(e){{}}ap(cur);}};}})();
-try{{if(Date.now()-new Date("{esc(data["built_at"])}").getTime()>30*3600*1000)document.getElementById("stale").style.display="block";}}catch(e){{}}
+(function(){{var t=new Date("{esc(data["built_at"])}").getTime();function tick(){{var m=Math.round((Date.now()-t)/60000),s=m<1?"just now":m<60?m+" min ago":m<2880?Math.round(m/60)+" h ago":Math.round(m/1440)+" days ago";document.getElementById("ago").textContent="("+s+")";if(Date.now()-t>30*3600*1000)document.getElementById("stale").style.display="block";}}try{{tick();setInterval(tick,60000);}}catch(e){{}}}})();
 </script></body></html>'''
 
 
