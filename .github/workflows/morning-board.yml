@@ -2,7 +2,10 @@ name: Morning board
 
 on:
   schedule:
-    - cron: "45 2 * * 1-5"     # 08:15 IST, Monday to Friday (GitHub cron is UTC)
+    - cron: "45 2 * * 1-5"     # 08:15 IST: overnight news (GitHub cron is UTC)
+    - cron: "35 3 * * 1-5"     # 09:05 IST: starts early, then waits for NSE pre-open (published 09:08)
+    - cron: "*/15 4-9 * * 1-5" # every 15 min, 09:30-15:15 IST: keeps the page fresh through the session
+    - cron: "0,15,30 10 * * 1-5" # 15:30, 15:45, 16:00 IST: closing prices
   push:
     branches: [main]           # every push rebuilds the page
   workflow_dispatch:           # "Run workflow" button for a manual refresh
@@ -30,6 +33,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           PAGE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+          REFRESH_URL: https://github.com/${{ github.repository }}/actions/workflows/morning-board.yml
         run: python build_board.py
       - uses: actions/upload-pages-artifact@v3
         with:

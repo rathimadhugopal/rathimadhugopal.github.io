@@ -42,10 +42,58 @@ def yahoo_history(ticker: str) -> list[tuple[dt.date, float]]:
             out.append((dt.datetime.fromtimestamp(t, tz=dt.timezone.utc).date(), float(c)))
     if not out:
         raise ValueError("no price data")
-    return out
+    mt = res.get("meta", {}).get("regularMarketTime")
+    as_of = dt.datetime.fromtimestamp(mt, tz=dt.timezone.utc) if mt else None
+    return {"hist": out, "as_of": as_of}
 
 
-def google_news(query: str, window: str, limit: int) -> list[dict]:
+# Stories that mention a company but say nothing about its stock
+JUNK = [
+    "recruitment", "admit card", "exam", "vacancy", "vacancies",
+    "apprentice", "clerk", "probationary officer", "how to", "step-by-step", "step by step", "fd rates",
+    "fixed deposit rates", "interest rate on savings", "ifsc", "customer care", "kyc", "credit card offer",
+    "cashback", "festive offer", "emi", "loan rates", "home loan rate", "gold loan", "scholarship", "internship",
+    "sbi life", "sbi card", "sbi cards", "sbi mutual fund", "sbi funds", "hdfc life", "hdfc amc", "hdfc securities",
+    "titan eye", "titan watches", "fastrack", "taneira",
+]
+# Words that mark a story as being about the stock; used to rank, not to exclude
+MARKET_WORDS = ["share", "shares", "stock", "nse", "bse", "sensex", "nifty", "q1", "q2", "q3", "q4", "quarter",
+                "results", "profit", "revenue", "brokerage", "target price", "rating", "investors", "market cap",
+                "rbi", "sebi", "stake", "block deal", "fii", "dii", "npa", "margin", "guidance", "order", "deal"]
+
+
+STATES = ["andhra pradesh", "arunachal", "assam", "bihar", "chhattisgarh", "goa", "gujarat", "haryana", "himachal",
+          "jharkhand", "karnataka", "kerala", "madhya pradesh", "maharashtra", "manipur", "meghalaya", "mizoram",
+          "nagaland", "odisha", "punjab", "rajasthan", "sikkim", "tamil nadu", "telangana", "tripura", "uttar pradesh",
+          "uttarakhand", "west bengal", "delhi", "jammu", "kashmir", "ladakh", "puducherry", "chandigarh",
+          "mumbai", "bengaluru", "bangalore", "hyderabad", "kolkata", "chennai", "pune", "ahmedabad", "lucknow", "jaipur"]
+REGION_ALIASES = {"tamil nadu": ["tamil nadu", "tamilnadu", "chennai", "coimbatore", "madurai", "tn "]}
+
+
+def region_tag(title: str, home: str | None) -> str | None:
+    """'Your state' if the headline names your region, 'Other state' if it names a different one, else None."""
+    if not home:
+        return None
+    t = " " + title.lower() + " "
+    mine = REGION_ALIASES.get(home.lower(), [home.lower()])
+    if any(a in t for a in mine):
+        return "Your state"
+    if any(st in t for st in STATES if st not in mine):
+        return "Other state"
+    return None
+
+
+def is_junk(title: str, extra: list[str] | None = None) -> bool:
+    t = " " + title.lower() + " "
+    return any(k in t for k in JUNK + (extra or []))
+
+
+def market_relevance(title: str) -> int:
+    t = " " + title.lower() + " "
+    return sum(1 for w in MARKET_WORDS if f" {w} " in t or f" {w}," in t or f" {w}:" in t)
+
+
+def google_news(query: str, window: str, limit: int, exclude: list[str] | None = None) -> list[dict]:
     q = urllib.parse.quote_plus(f"{query} {window}".strip())
     url = f"https://news.google.com/rss/search?q={q}&hl=en-IN&gl=IN&ceid=IN:en"
     r = httpx.get(url, headers=UA, timeout=TIMEOUT, follow_redirects=True)
@@ -60,7 +108,7 @@ def google_news(query: str, window: str, limit: int) -> list[dict]:
         if source and title.endswith(" - " + source):
             title = title[: -len(source) - 3].strip()
         key = re.sub(r"\W+", "", title.lower())[:60]
-        if not title or key in seen:
+        if not title or key in seen or is_junk(title, exclude):
             continue
         seen.add(key)
         pub = it.findtext("pubDate") or ""
@@ -69,10 +117,81 @@ def google_news(query: str, window: str, limit: int) -> list[dict]:
         except ValueError:
             when = None
         link = it.findtext("link") or ""
-        items.append({"title": title, "source": source, "link": link if link.startswith("https://") else "", "when": when})
-        if len(items) >= limit:
+        items.append({"title": title, "source": source, "link": link if link.startswith("https://") else "", "when": when,
+                      "relevance": market_relevance(title)})
+        if len(items) >= limit * 4:
             break
-    return items
+    # most market-relevant first, newest first within the same relevance
+    items.sort(key=lambda x: (-x["relevance"], -(x["when"].timestamp() if x["when"] else 0)))
+    return items[:limit]
+
+
+# ------------------------------------------------------------------ NSE pre-open (9:00-9:08 IST)
+NSE_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36",
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "en-IN,en;q=0.9",
+    "Referer": "https://www.nseindia.com/market-data/pre-open-market-cm-and-emerge-market",
+}
+
+
+def nse_preopen(symbols: list[str]) -> dict[str, dict]:
+    """Pre-open price per symbol from nseindia.com. Needs a cookie handshake; may be blocked from some networks."""
+    want = {s.upper() for s in symbols}
+    out: dict[str, dict] = {}
+    with httpx.Client(headers=NSE_HEADERS, timeout=TIMEOUT, follow_redirects=True) as c:
+        c.get("https://www.nseindia.com/")  # sets the cookies the API expects
+        c.get("https://www.nseindia.com/market-data/pre-open-market-cm-and-emerge-market")
+        r = c.get("https://www.nseindia.com/api/market-data-pre-open?key=ALL")
+        r.raise_for_status()
+        rows = r.json().get("data", [])
+        for row in rows:
+            m = row.get("metadata", {})
+            sym = str(m.get("symbol", "")).upper()
+            if sym in want and m.get("iep"):
+                out[sym] = {
+                    "price": float(m["iep"]),
+                    "prev_close": float(m.get("previousClose") or 0) or None,
+                    "change_pct": float(m.get("pChange") or 0),
+                    "qty": m.get("finalQuantity"),
+                    "time": m.get("lastUpdateTime") or r.json().get("timestamp"),
+                }
+        # anything missing from the list: try the per-stock quote
+        for sym in want - set(out):
+            try:
+                q = c.get(f"https://www.nseindia.com/api/quote-equity?symbol={urllib.parse.quote(sym)}").json()
+                po = q.get("preOpenMarket") or {}
+                price = po.get("finalPrice") or po.get("IEP")
+                if price:
+                    prev = (q.get("priceInfo") or {}).get("previousClose")
+                    out[sym] = {"price": float(price), "prev_close": float(prev) if prev else None,
+                                "change_pct": float(po.get("perChange") or ((float(price) / float(prev) - 1) * 100 if prev else 0)),
+                                "qty": po.get("finalQuantity"), "time": po.get("lastUpdateTime")}
+            except Exception:
+                pass
+    return out
+
+
+def wait_for_preopen(symbols: list[str], now_fn=None, until: dt.time = dt.time(9, 14), every: int = 15) -> dict[str, dict]:
+    """Between 9:00 and `until` IST, keep asking NSE until pre-open prices appear (published about 9:08)."""
+    import time as _t
+    tz = ZoneInfo("Asia/Kolkata")
+    now_fn = now_fn or (lambda: dt.datetime.now(tz))
+    last_err = None
+    while True:
+        now = now_fn()
+        try:
+            got = nse_preopen(symbols)
+            if len(got) >= max(1, len(symbols) // 2):
+                return got
+        except Exception as e:
+            last_err = e
+        if not (dt.time(9, 0) <= now.time() < until):
+            if last_err:
+                raise last_err
+            return {}
+        print(f"{now:%H:%M:%S} waiting for NSE pre-open...", file=sys.stderr)
+        _t.sleep(every)
 
 
 # ------------------------------------------------------------------ scoring
@@ -96,6 +215,7 @@ GOOD = {
     "Buying momentum": (["surge", "surges", "rallies", "rally", "jumps", "soars", "gains", "record high", "52-week high", "hits high"], 1),
 }
 SEVERE = {"Court case", "Data breach", "Regulator action", "Probe"}
+HOME_REGION: list = [None]  # set from config at build time
 
 
 def score_headline(title: str) -> tuple[int, list[str], list[str]]:
@@ -122,6 +242,10 @@ def news_summary(items: list[dict], now: dt.datetime) -> dict:
     for it in items:
         s, bad, good = score_headline(it["title"])
         it["score"], it["bad_tags"], it["good_tags"] = s, bad, good
+        it["region"] = region_tag(it["title"], HOME_REGION[0])
+        if it["region"] == "Other state":
+            s = 0  # a regional closure elsewhere says nothing about the stock
+            it["score"] = 0
         age_h = (now - it["when"]).total_seconds() / 3600 if it["when"] else 36
         w = 1.5 if age_h <= 24 else 1.0
         total += s * w
@@ -134,7 +258,10 @@ def news_summary(items: list[dict], now: dt.datetime) -> dict:
     return {"score": round(avg, 2), "tone": tone, "flags": flags, "count": len(items)}
 
 
-def technicals(hist: list[tuple[dt.date, float]]) -> dict:
+def technicals(hist) -> dict:
+    as_of = None
+    if isinstance(hist, dict):
+        hist, as_of = hist["hist"], hist.get("as_of")
     closes = [c for _, c in hist]
     last, prev = closes[-1], closes[-2] if len(closes) > 1 else closes[-1]
     sma = lambda n: sum(closes[-n:]) / min(n, len(closes))
@@ -149,6 +276,7 @@ def technicals(hist: list[tuple[dt.date, float]]) -> dict:
     vol = math.sqrt(sum((r - mean) ** 2 for r in rets) / len(rets)) if len(rets) > 1 else 0.01
     return {
         "last": last, "prev": prev, "date": hist[-1][0].isoformat(),
+        "as_of": as_of.isoformat() if as_of else None,
         "day_vol_pct": vol * 100,
         "range_lo": last * (1 - vol), "range_hi": last * (1 + vol),
         "change_pct": (last / prev - 1) * 100,
@@ -159,9 +287,17 @@ def technicals(hist: list[tuple[dt.date, float]]) -> dict:
     }
 
 
-def lean_for(tech: dict | None, news: dict, mood: dict) -> dict:
+def lean_for(tech: dict | None, news: dict, mood: dict, preopen: dict | None = None) -> dict:
     """Weighted hint for today. Deliberately simple and fully explained."""
     score, why = 0.0, []
+    if preopen:
+        g = preopen["change_pct"]
+        if g >= 1.0:
+            score += 1; why.append(f"NSE pre-open price is {g:+.1f}% above yesterday's close (gap up)")
+        elif g <= -1.0:
+            score -= 1; why.append(f"NSE pre-open price is {g:+.1f}% below yesterday's close (gap down)")
+        else:
+            why.append(f"NSE pre-open {g:+.1f}%, flat open")
     if news["count"]:
         score += news["score"] * 2
         why.append(f"headlines are {news['tone']} ({news['score']:+.1f})")
@@ -219,6 +355,8 @@ def option_check(opt: dict, stock: dict | None, today: dt.date) -> dict:
         out["verdict"], out["notes"] = "No price", ["price unavailable"]
         return out
     last, vol = tech["last"], max(tech["day_vol_pct"], 0.05)
+    if stock.get("preopen"):
+        last = stock["preopen"]["price"]
     dist_pct = (out["strike"] - last) / last * 100 if out["type"] == "CE" else (last - out["strike"]) / last * 100
     ranges = dist_pct / vol  # distance to strike in "usual day ranges"
     out["last"], out["dist_pct"], out["ranges"] = last, dist_pct, ranges
@@ -250,8 +388,16 @@ def option_check(opt: dict, stock: dict | None, today: dt.date) -> dict:
 
 
 # ------------------------------------------------------------------ build
-def build(config: dict, now: dt.datetime, fetch_prices, fetch_news, log=print) -> dict:
+def build(config: dict, now: dt.datetime, fetch_prices, fetch_news, log=print, fetch_preopen=None) -> dict:
     tz = now.tzinfo
+    HOME_REGION[0] = config.get("region")
+    preopen, preopen_error = {}, None
+    if fetch_preopen is not None:
+        try:
+            preopen = fetch_preopen([x["symbol"] for x in config["stocks"]])
+        except Exception as e:
+            preopen_error = str(e)
+            log(f"nse pre-open: {e}")
     mood, mood_rows = {}, []
     for m in config.get("market_mood", []):
         try:
@@ -270,12 +416,14 @@ def build(config: dict, now: dt.datetime, fetch_prices, fetch_news, log=print) -
         except Exception as e:
             log(f"price {s['symbol']}: {e}"); entry["tech"] = None; entry["price_error"] = str(e)
         try:
-            items = fetch_news(s["search"], config.get("news_window", "when:2d"), config.get("headlines_per_item", 5))
+            items = fetch_news(s["search"], config.get("news_window", "when:2d"), config.get("headlines_per_item", 5),
+                               config.get("exclude", []) + s.get("exclude", []))
         except Exception as e:
             log(f"news {s['symbol']}: {e}"); items = []; entry["news_error"] = str(e)
         entry["news"] = news_summary(items, now)
         entry["headlines"] = items
-        entry["lean"] = lean_for(entry["tech"], entry["news"], mood)
+        entry["preopen"] = preopen.get(s["symbol"].upper())
+        entry["lean"] = lean_for(entry["tech"], entry["news"], mood, entry["preopen"])
         stocks.append(entry)
 
     commodities = []
@@ -286,7 +434,8 @@ def build(config: dict, now: dt.datetime, fetch_prices, fetch_news, log=print) -
         except Exception as e:
             log(f"price {c['ticker']}: {e}"); entry["tech"] = None
         try:
-            items = fetch_news(c["search"], config.get("news_window", "when:2d"), config.get("headlines_per_item", 5))
+            items = fetch_news(c["search"], config.get("news_window", "when:2d"), config.get("headlines_per_item", 5),
+                               config.get("exclude", []))
         except Exception as e:
             log(f"news {c['name']}: {e}"); items = []
         entry["news"] = news_summary(items, now)
@@ -295,7 +444,8 @@ def build(config: dict, now: dt.datetime, fetch_prices, fetch_news, log=print) -
 
     by_symbol = {st["symbol"]: st for st in stocks}
     options = [option_check(o, by_symbol.get(o["symbol"]), now.date()) for o in config.get("options", [])]
-    return {"built_at": now.isoformat(), "tz": str(tz), "mood": mood_rows, "stocks": stocks, "commodities": commodities, "options": options}
+    return {"built_at": now.isoformat(), "tz": str(tz), "mood": mood_rows, "stocks": stocks, "commodities": commodities,
+            "options": options, "preopen_error": preopen_error, "preopen_count": len(preopen)}
 
 
 # ------------------------------------------------------------------ render
@@ -350,7 +500,8 @@ def verdict(entry: dict) -> str:
 
 
 def headline_html(it: dict, now: dt.datetime) -> str:
-    tags = "".join(f'<span class="tag bad">{esc(t)}</span>' for t in it.get("bad_tags", [])[:1])
+    tags = f'<span class="tag region">{esc(it["region"])}</span>' if it.get("region") else ""
+    tags += "".join(f'<span class="tag bad">{esc(t)}</span>' for t in it.get("bad_tags", [])[:1])
     tags += "".join(f'<span class="tag good">{esc(t)}</span>' for t in it.get("good_tags", [])[:1])
     when = ""
     if it.get("when"):
@@ -361,8 +512,22 @@ def headline_html(it: dict, now: dt.datetime) -> str:
     return f'<li>{title}<span class="meta">{meta}</span>{tags}</li>'
 
 
-def render(data: dict, demo: bool = False) -> str:
+def data_time(t: dict | None, tz) -> str:
+    """Exchange's last-trade time for this quote, with seconds, in IST."""
+    if not t:
+        return ""
+    if t.get("as_of"):
+        return dt.datetime.fromisoformat(t["as_of"]).astimezone(tz).strftime("%d %b %H:%M:%S")
+    return t["date"]
+
+
+def render(data: dict, demo: bool = False, refresh_url: str | None = None) -> str:
     now = dt.datetime.fromisoformat(data["built_at"])
+    tz = now.tzinfo
+    latest_price = max((dt.datetime.fromisoformat(x["tech"]["as_of"]) for x in data["stocks"] if x.get("tech") and x["tech"].get("as_of")), default=None)
+    latest_news = max((h["when"] if isinstance(h["when"], dt.datetime) else dt.datetime.fromisoformat(h["when"]) for x in data["stocks"] for h in x["headlines"] if h.get("when")), default=None)
+    price_line = latest_price.astimezone(tz).strftime("%a %d %b %Y, %H:%M:%S IST") if latest_price else "unavailable"
+    news_line = latest_news.astimezone(tz).strftime("%d %b %H:%M:%S IST") if latest_news else "none"
     day = now.strftime("%a %d %b %Y")
     at = now.strftime("%H:%M:%S")
     bad_count = sum(1 for s in data["stocks"] if s["news"]["flags"])
@@ -380,8 +545,17 @@ def render(data: dict, demo: bool = False) -> str:
         t, lean = s["tech"], s["lean"]
         cls = {"Leaning up": "up", "Leaning down": "down", "No clear lean": "flat"}[lean["label"]]
         price = (f'<div class="price"><b>₹{fmt(t["last"])}</b><span class="{"up" if t["change_pct"] >= 0 else "down"}">{pct(t["change_pct"])}</span>'
-                 f'<small>close {esc(t["date"])}</small></div>' if t
+                 f'<small>close as of {esc(data_time(t, tz))}</small></div>' if t
                  else '<div class="price muted">price unavailable</div>')
+        po = s.get("preopen")
+        if po:
+            gcls = "up" if po["change_pct"] >= 0 else "down"
+            preopen_html = (f'<p class="preopen">NSE pre-open <b>₹{fmt(po["price"])}</b> <b class="{gcls}">{pct(po["change_pct"])}</b> vs close'
+                            f'<span class="meta">published {esc(po.get("time") or "")}</span></p>')
+        else:
+            hour = now.hour + now.minute / 60
+            why_not = "published at 9:08, rebuilt at 9:10" if hour < 9.13 else "not received from NSE this run"
+            preopen_html = f'<p class="preopen muted">NSE pre-open: {why_not}</p>'
         flags = "".join(f'<span class="flag">{esc(f)}</span>' for f in s["news"]["flags"])
         key = key_headline(s)
         rest = [h for h in s["headlines"] if h is not key]
@@ -403,6 +577,7 @@ def render(data: dict, demo: bool = False) -> str:
   <p class="verdict">{v}</p>
   {flags}
   <div class="row">{price}{spark(t["spark"], t["change_5d_pct"] >= 0) if t else ""}</div>
+  {preopen_html}
   {forecast}
   <ul class="heads">{heads}</ul>
   <p class="why">{esc("; ".join(lean["reasons"][:3]).capitalize())}.</p>
@@ -444,6 +619,7 @@ def render(data: dict, demo: bool = False) -> str:
 :root,:root[data-theme="light"]{{--bg:#F6F7F4;--card:#FFFFFF;--ink:#1B2A2F;--muted:#67757A;--line:#DCE1DD;--up:#1F8A5B;--down:#C23B3B;--flat:#5B6B72;--amber:#C98A2B;--amber-bg:#FBF1DF;--up-bg:#E4F3EB;--down-bg:#F9E3E3;color-scheme:light}}
 @media(prefers-color-scheme:dark){{:root:not([data-theme="light"]){{--bg:#131A1D;--card:#1C262B;--ink:#E8EDEE;--muted:#9AA8AD;--line:#2E3B41;--up:#4CC28D;--down:#F07A7A;--flat:#9AA8AD;--amber:#E6AE55;--amber-bg:#3A2E16;--up-bg:#173426;--down-bg:#3D1F1F;color-scheme:dark}}}}
 :root[data-theme="dark"]{{--bg:#131A1D;--card:#1C262B;--ink:#E8EDEE;--muted:#9AA8AD;--line:#2E3B41;--up:#4CC28D;--down:#F07A7A;--flat:#9AA8AD;--amber:#E6AE55;--amber-bg:#3A2E16;--up-bg:#173426;--down-bg:#3D1F1F;color-scheme:dark}}
+.refresh{{margin-right:8px;color:var(--ink);text-decoration:none}}
 .theme{{float:right;margin-top:-2px;font:inherit;font-size:13px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px 10px;cursor:pointer}}
 *{{box-sizing:border-box}}html,body{{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,"Segoe UI",Roboto,sans-serif;font-variant-numeric:tabular-nums}}
 body{{padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}}
@@ -467,12 +643,13 @@ h2{{margin:0;font-size:19px;font-weight:600}}h2 small{{font-weight:400;color:var
 .row{{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:6px 0 4px}}
 .price b{{font-size:20px;font-weight:600;margin-right:8px}}.price span{{font-weight:600}}.price small{{display:block;color:var(--muted);font-size:12px}}
 .spark{{width:120px;height:32px;flex:none}}
+.preopen{{margin:6px 0 0;font-size:14px}}.preopen b{{font-weight:600}}.preopen .meta{{display:inline;margin-left:6px}}
 .forecast{{margin:6px 0 2px;font-size:14px;color:var(--muted)}}.forecast b{{font-weight:600}}
 .heads{{list-style:none;margin:10px 0 0;padding:0}}.heads li{{padding:7px 0;border-top:1px solid var(--line);font-size:14px}}
 .heads a{{color:var(--ink);text-decoration:none}}.heads a:hover{{text-decoration:underline}}
 .meta{{display:block;color:var(--muted);font-size:12px;margin-top:2px}}
 .tag{{display:inline-block;font-size:11px;font-weight:600;padding:1px 7px;border-radius:4px;margin:4px 4px 0 0}}
-.tag.bad{{background:var(--down-bg);color:var(--down)}}.tag.good{{background:var(--up-bg);color:var(--up)}}
+.tag.region{{background:var(--bg);color:var(--muted);border:1px solid var(--line)}}.tag.bad{{background:var(--down-bg);color:var(--down)}}.tag.good{{background:var(--up-bg);color:var(--up)}}
 .why{{margin:4px 0 0;font-size:13px;color:var(--muted)}}
 .opt{{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:15px}}.opt:first-child{{border-top:0}}
 .note{{font-size:14px;color:var(--muted);margin:6px 0 0}}
@@ -480,7 +657,8 @@ h2{{margin:0;font-size:19px;font-weight:600}}h2 small{{font-weight:400;color:var
 #stale{{display:none}}
 </style></head><body><div class="wrap">
 <button class="theme" id="theme" type="button" aria-label="Switch theme">Theme: auto</button>
-<p class="date"><b>Data updated: {esc(day)}, {esc(at)} IST</b> <span id="ago"></span></p>
+{f'<a class="theme refresh" href="{esc(refresh_url)}" target="_blank" rel="noopener">Refresh now</a>' if refresh_url else ""}
+<p class="date"><b>Stock data as of: {esc(price_line)}</b> <span id="ago"></span><br>Latest headline {esc(news_line)}. Pre-open prices: {esc(f"{data.get('preopen_count', 0)} of {len(data['stocks'])} stocks") if data.get("preopen_count") else ("unavailable (" + esc(data["preopen_error"][:60]) + ")" if data.get("preopen_error") else "not in this run")}. Page built {esc(day)} {esc(at)}.</p>
 <h1>{esc(headline)}</h1>
 <div id="stale" class="banner">This page is more than a day old. The morning run may have failed; check the GitHub Actions tab.</div>
 {demo_banner}
@@ -490,14 +668,14 @@ h2{{margin:0;font-size:19px;font-weight:600}}h2 small{{font-weight:400;color:var
 {options_html}
 <h3>Crude oil</h3>
 {comms}
-<p class="foot">"Today" is a lean from news tone and trend, capped at 75%, not a guarantee. Prices: Yahoo Finance closes. Headlines: Google News. Not investment advice.</p>
+<p class="foot">Rebuilt every 15 minutes during market hours; tap Refresh now for an immediate rebuild. "Today" is a lean from news tone and trend, capped at 75%, not a guarantee. Prices: Yahoo Finance closes. Headlines: Google News. Not investment advice.</p>
 </div>
 <script>
 (function(){{var r=document.documentElement,b=document.getElementById("theme"),m=["auto","light","dark"],k="board.theme";
 function ap(v){{if(v==="auto")r.removeAttribute("data-theme");else r.setAttribute("data-theme",v);b.textContent="Theme: "+v;}}
 var cur="auto";try{{cur=localStorage.getItem(k)||"auto";}}catch(e){{}}ap(cur);
 b.onclick=function(){{cur=m[(m.indexOf(cur)+1)%3];try{{localStorage.setItem(k,cur);}}catch(e){{}}ap(cur);}};}})();
-(function(){{var t=new Date("{esc(data["built_at"])}").getTime();function tick(){{var m=Math.round((Date.now()-t)/60000),s=m<1?"just now":m<60?m+" min ago":m<2880?Math.round(m/60)+" h ago":Math.round(m/1440)+" days ago";document.getElementById("ago").textContent="("+s+")";if(Date.now()-t>30*3600*1000)document.getElementById("stale").style.display="block";}}try{{tick();setInterval(tick,60000);}}catch(e){{}}}})();
+(function(){{var t=new Date("{esc(latest_price.isoformat() if latest_price else data["built_at"])}").getTime();function tick(){{var m=Math.round((Date.now()-t)/60000),s=m<1?"just now":m<60?m+" min ago":m<2880?Math.round(m/60)+" h ago":Math.round(m/1440)+" days ago";document.getElementById("ago").textContent="("+s+")";if(Date.now()-t>30*3600*1000)document.getElementById("stale").style.display="block";}}try{{tick();setInterval(tick,60000);setInterval(function(){{if(!document.hidden)location.reload();}},300000);}}catch(e){{}}}})();
 </script></body></html>'''
 
 
@@ -516,7 +694,8 @@ def demo_fetchers(now: dt.datetime):
                 p *= 1 + rnd.gauss(drift, 0.012)
                 out.append((d, round(p, 2)))
             d += dt.timedelta(days=1)
-        return out
+        last_day = out[-1][0]
+        return {"hist": out, "as_of": dt.datetime.combine(last_day, dt.time(15, 30), tzinfo=now.tzinfo)}
 
     canned = {
         "Yes Bank": ["Supreme Court rules against Yes Bank in AT-1 bond write-off case", "Yes Bank shares fall 6% after apex court verdict", "SMBC completes additional stake purchase in Yes Bank"],
@@ -525,12 +704,16 @@ def demo_fetchers(now: dt.datetime):
         "Brent": ["Brent crude slips as OPEC+ signals output increase", "Oil steadies after US inventory draw"],
     }
 
-    def news(query, window, limit):
+    def news(query, window, limit, exclude=None):
         key = next((k for k in canned if k.lower() in query.lower()), None)
         items = canned.get(key, [])
         return [{"title": t, "source": "Demo wire", "link": "", "when": now - dt.timedelta(hours=3 + i * 5)} for i, t in enumerate(items)][:limit]
 
-    return prices, news
+    def preopen(symbols):
+        return {sym: {"price": round(base.get(sym + ".NS", 100) * (1 + rnd.gauss(0, 0.01)), 2), "prev_close": base.get(sym + ".NS"),
+                      "change_pct": round(rnd.gauss(0, 1.0), 2), "qty": 12000, "time": now.strftime("%d-%b-%Y 09:08:00")} for sym in symbols}
+
+    return prices, news, preopen
 
 
 # ------------------------------------------------------------------ telegram (optional)
@@ -541,7 +724,7 @@ def telegram_summary(data: dict, url: str | None) -> None:
     lines = ["Morning Board"]
     for s in data["stocks"]:
         flag = " ⚠️ " + ", ".join(s["news"]["flags"]) if s["news"]["flags"] else ""
-        chg = f" {s['tech']['change_pct']:+.1f}%" if s["tech"] else ""
+        chg = f" pre-open {s['preopen']['change_pct']:+.1f}%" if s.get("preopen") else (f" {s['tech']['change_pct']:+.1f}%" if s["tech"] else "")
         lines.append(f"{s['name']}{chg}: {s['lean']['label']}{flag}")
     if url:
         lines.append(url)
@@ -564,12 +747,12 @@ def main(argv=None) -> int:
     with open(a.config, encoding="utf-8") as f:
         config = json.load(f)
     now = dt.datetime.now(ZoneInfo(config.get("timezone", "Asia/Kolkata")))
-    fp, fn = demo_fetchers(now) if a.demo else (yahoo_history, google_news)
-    data = build(config, now, fp, fn, log=lambda m: print(m, file=sys.stderr))
+    fp, fn, fpo = demo_fetchers(now) if a.demo else (yahoo_history, google_news, wait_for_preopen)
+    data = build(config, now, fp, fn, log=lambda m: print(m, file=sys.stderr), fetch_preopen=fpo)
 
     os.makedirs(os.path.dirname(a.out) or ".", exist_ok=True)
     with open(a.out, "w", encoding="utf-8") as f:
-        f.write(render(data, demo=a.demo))
+        f.write(render(data, demo=a.demo, refresh_url=os.getenv("REFRESH_URL")))
     if a.json:
         with open(a.json, "w", encoding="utf-8") as f:
             json.dump(data, f, default=str, indent=1)
